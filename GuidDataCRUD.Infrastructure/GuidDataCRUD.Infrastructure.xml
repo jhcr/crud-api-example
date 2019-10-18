@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GuidDataCRUD.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:GuidDataCRUD.Infrastructure.Cache.RedisGuidDataDecorator">
+            <summary>
+            Add redis cache and delegate GuidData CRUD operations to decorated repository
+            </summary>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Cache.RedisGuidDataDecorator.#ctor(GuidDataCRUD.Business.IGuidDataRepository,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="decorated">The repository delegate further processing data</param>
+            <param name="cache">The distributed cache</param>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Cache.RedisGuidDataDecorator.CreateGuidData(GuidDataCRUD.Business.Models.GuidData)">
+            <summary>
+            Set cache after data created
+            </summary>
+            <param name="guidData"  cref="T:GuidDataCRUD.Business.Models.GuidData">The guidData</param>
+            <returns>The newly created GuidData</returns>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Cache.RedisGuidDataDecorator.UpsertGuidData(GuidDataCRUD.Business.Models.GuidData)">
+            <summary>
+            Set cache after data created or updated
+            </summary>
+            <param name="guidData">The guidData</param>
+            <returns>The affected data and: <c>true</c> if updating was performed vs creating; otherwise, <c>false</c></returns>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Cache.RedisGuidDataDecorator.DeleteGuidData(System.Guid)">
+            <summary>
+            Remove from cache after data deleted
+            </summary>
+            <param name="guid">The guid</param>
+            <returns>True if found and deleted</returns>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Cache.RedisGuidDataDecorator.GetGuidData(System.Guid)">
+            <summary>
+            Get from cache, if not cached, get from repository, then set cache
+            </summary>
+            <param name="guid">The guid</param>
+            <returns>The GuidData</returns>
+        </member>
+        <member name="T:GuidDataCRUD.Infrastructure.Database.SqlGuidDataRepository">
+            <summary>
+            Concrete implementation of <see cref="T:GuidDataCRUD.Business.IGuidDataRepository"/> interface, using SQL database
+            </summary>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Database.SqlGuidDataRepository.#ctor(Microsoft.Extensions.Options.IOptions{GuidDataCRUD.Business.Models.AppSettings})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="setting">The app settings</param>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Database.SqlGuidDataRepository.GuidDataCRUD#Business#IGuidDataRepository#GetGuidData(System.Guid)">
+            <summary>
+            Get a specific guid and its data
+            </summary>
+            <param name="guid">The guid</param>
+            <returns>the found guidData</returns>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Database.SqlGuidDataRepository.GuidDataCRUD#Business#IGuidDataRepository#CreateGuidData(GuidDataCRUD.Business.Models.GuidData)">
+            <summary>
+            Create GuidData
+            </summary>
+            <param name="guidData" cref="T:GuidDataCRUD.Business.Models.GuidData">The guidData</param>
+            <returns>The created guidData</returns>
+            <exception cref="T:GuidDataCRUD.Business.Exceptions.ConflictResourceException">If the guid already exists</exception>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Database.SqlGuidDataRepository.GuidDataCRUD#Business#IGuidDataRepository#UpsertGuidData(GuidDataCRUD.Business.Models.GuidData)">
+            <summary>
+            Upsert GuidData
+            </summary>
+            <param name="guidData" cref="T:GuidDataCRUD.Business.Models.GuidData">The guidData</param>
+            <returns>The affected data and: <c>true</c> if updating was performed vs creating; otherwise, <c>false</c></returns>
+        </member>
+        <member name="M:GuidDataCRUD.Infrastructure.Database.SqlGuidDataRepository.GuidDataCRUD#Business#IGuidDataRepository#DeleteGuidData(System.Guid)">
+            <summary>
+            Delete a guid and its data
+            </summary>
+            <param name="guid">the guid</param>
+            <returns><c>true</c> if found and deleted; otherwise, <c>false</c></returns>
+        </member>
+    </members>
+</doc>

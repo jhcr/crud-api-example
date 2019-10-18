@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GuidDataCRUD.Business</name>
+    </assembly>
+    <members>
+        <member name="T:GuidDataCRUD.Business.Contracts.GuidDataRequest">
+            <summary>
+            GuidData Request
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Contracts.GuidDataRequest.User">
+            <summary>
+            User of the GuidData
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Contracts.GuidDataRequest.Expire">
+            <summary>
+            Absolute expiration of the GuidData (Unix Epoc time)
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Contracts.GuidDataResponse">
+            <summary>
+            GuidData Response
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Contracts.GuidDataResponse.Guid">
+            <summary>
+            Identifier of the GuidData
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Contracts.GuidDataResponse.User">
+            <summary>
+            User of the GuidData
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Contracts.GuidDataResponse.Expire">
+            <summary>
+            Absolute expiration of the GuidData (Unix Epoc time)
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Exceptions.ConflictResourceException">
+            <summary>
+            Exception raised when resource identifer already exist in store (e.g, database)
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Exceptions.ValidationException">
+            <summary>
+            Exception raised when data validation failed
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Extensions.GuidDataConversion">
+            <summary>
+            Static extension for all DTO conversion
+            </summary>
+        </member>
+        <member name="M:GuidDataCRUD.Business.Extensions.GuidDataConversion.ToModel(GuidDataCRUD.Business.Contracts.GuidDataRequest,System.Int32)">
+            <summary>
+            Convert GuidData Contract to Model
+            </summary>
+            <param name="contract">The contract</param>
+            <param name="defaultExpireDays">default of 30 days from the time of creation, if an expiration time is not provided.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuidDataCRUD.Business.Extensions.GuidDataConversion.ToContract(GuidDataCRUD.Business.Models.GuidData)">
+            <summary>
+            Convert GuidData Model to Contract
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GuidDataCRUD.Business.GuidDataService">
+            <summary>
+            Concrete implementation of <see cref="T:GuidDataCRUD.Business.IGuidDataService"/> interface
+            </summary>
+            <remarks>
+            This defines all the business logic specific to <see cref="T:GuidDataCRUD.Business.Models.GuidData"/> 
+            </remarks>
+        </member>
+        <member name="M:GuidDataCRUD.Business.GuidDataService.#ctor(GuidDataCRUD.Business.IGuidDataRepository,Microsoft.Extensions.Options.IOptions{GuidDataCRUD.Business.Models.AppSettings})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="repo">The GuidData repository</param>
+            <param name="settings" cref="T:GuidDataCRUD.Business.Models.AppSettings">The settings from app config</param>
+        </member>
+        <member name="M:GuidDataCRUD.Business.GuidDataService.GuidDataCRUD#Business#IGuidDataService#GetGuidData(System.String)">
+            <summary>
+            Get a specific GuidData
+            </summary>
+            <param name="guid">The guid</param>
+            <returns></returns>
+        </member>
+        <member name="M:GuidDataCRUD.Business.GuidDataService.GuidDataCRUD#Business#IGuidDataService#UpsertGuidData(System.String,GuidDataCRUD.Business.Contracts.GuidDataRequest)">
+            <summary>
+            Upsert a specific GuidData
+            </summary>
+            <param name="guid">The guid</param>
+            <param name="request">The guidData request</param>
+            <returns>the affected GuidData</returns>
+        </member>
+        <member name="M:GuidDataCRUD.Business.GuidDataService.GuidDataCRUD#Business#IGuidDataService#CreateGuidData(GuidDataCRUD.Business.Contracts.GuidDataRequest)">
+            <summary>
+            Create a new GuidData
+            </summary>
+            <param name="request">The guidData request</param>
+            <returns>the updated GuidData</returns>
+        </member>
+        <member name="M:GuidDataCRUD.Business.GuidDataService.GuidDataCRUD#Business#IGuidDataService#DeleteGuidData(System.String)">
+            <summary>
+            Delete a specific GuidData
+            </summary>
+            <param name="guid">the guid</param>
+            <returns><c>true</c> if found and deleted; otherwise, <c>false</c></returns>
+        </member>
+        <member name="T:GuidDataCRUD.Business.IGuidDataRepository">
+            <summary>
+            Interface of repository sepcific to <see cref="T:GuidDataCRUD.Business.Models.GuidData"/>
+            </summary>
+            <remarks>
+            Reside in Business layer to reverse the dependency flow from Repository to Business
+            </remarks>
+        </member>
+        <member name="T:GuidDataCRUD.Business.IGuidDataService">
+            <summary>
+            Interface of <see cref="!:GuidData"/> business logic
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Models.AppSettings">
+            <summary>
+            Mapping all configuration items from json config
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Models.AppSettings.DefaultExpireDays">
+            <summary>
+            The default expire when value not proivided in request
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Models.AppSettings.Sql_ConnectionString_GuidData">
+            <summary>
+            Database connection string for GuidData Database
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Models.AppSettings.Sql_CommandTimeoutInSeconds">
+            <summary>
+            The sql command timeout in seconds
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Models.GuidData">
+            <summary>
+            GuidData domain model
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Models.GuidData.Guid">
+            <summary>
+            Identifier of the GuidData
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Models.GuidData.User">
+            <summary>
+            User of GuidData
+            </summary>
+        </member>
+        <member name="P:GuidDataCRUD.Business.Models.GuidData.Expire">
+            <summary>
+            Absolute expiration of GuidData (Unix Epoc time)
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Validators.GuidDataRequestValidator">
+            <summary>
+            Validator for GuidDataRequest
+            </summary>
+        </member>
+        <member name="M:GuidDataCRUD.Business.Validators.GuidValidator.EnsureValid(System.String,System.String)">
+            <summary>
+            Validator for Guid
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Business.Validators.ValidationFunctions">
+            <summary>
+            Static Class for all validation functions for reuse 
+            </summary>
+        </member>
+        <member name="M:GuidDataCRUD.Business.Validators.ValidationFunctions.StringRequired(System.String,System.String@)">
+            <summary>
+            Validate a string is required
+            </summary>
+            <param name="input"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GuidDataCRUD.Business.Validators.ValidationFunctions.MaxLengthNullable(System.String,System.Int32,System.String@)">
+            <summary>
+            Validate max length limit
+            </summary>
+            <param name="input"></param>
+            <param name="maxLength"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GuidDataCRUD.Business.Validators.ValidationFunctions.GuidNullable(System.String,System.Nullable{System.Guid}@,System.String@)">
+            <summary>
+            Validate the specific Guid format (32-bit hexadecimal in uppercase)
+            </summary>
+            <param name="input"></param>
+            <param name="value"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GuidDataCRUD.Business.Validators.ValidationFunctions.ExpireNullable(System.String,System.Nullable{System.Int64}@,System.String@)">
+            <summary>
+            validate the specific expire format (UNIX Epoch time)
+            </summary>
+            <param name="input"></param>
+            <param name="value"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

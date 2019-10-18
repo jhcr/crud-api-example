@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GuidDataCRUD.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:GuidDataCRUD.Tests.Business.GuidDataServiceTests">
+            <summary>
+            Unit tests of <see cref="T:GuidDataCRUD.Business.GuidDataService"/> 
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Tests.Infrastructure.RedisGuidDataDecoratorTests">
+            <summary>
+            Unit tests of <see cref="T:GuidDataCRUD.Infrastructure.Cache.RedisGuidDataDecorator"/>
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Tests.Infrastructure.SqlGuidDataRepositoryTests">
+            <summary>
+            Unit tests of <see cref="T:GuidDataCRUD.Infrastructure.Database.SqlGuidDataRepository"/>
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Tests.Web.GuidDataControllerTest">
+            <summary>
+            Unit Tests of <see cref="T:GuidDataCRUD.Web.Controllers.GuidDataController"/> 
+            </summary>
+        </member>
+    </members>
+</doc>

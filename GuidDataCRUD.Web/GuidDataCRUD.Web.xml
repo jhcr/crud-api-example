@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GuidDataCRUD.Web</name>
+    </assembly>
+    <members>
+        <member name="T:GuidDataCRUD.Web.Controllers.CustomControllerBase">
+            <summary>
+            Controller base
+            </summary>
+        </member>
+        <member name="T:GuidDataCRUD.Web.Controllers.GuidDataController">
+            <summary>
+            GuidData Controller
+            </summary>
+        </member>
+        <member name="M:GuidDataCRUD.Web.Controllers.GuidDataController.GetGuidData(System.String)">
+             <summary>
+             Get a specific guid and its data
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 GET /guid/3BED9CEFBB9F43E99DFE3EAE6CC5847F
+                 
+             </remarks>
+             <param name="guid">The guid, must be 32-bit hexadecimal in uppercase</param>
+             <returns>The guid data being found</returns>
+             <response code="200">Returns the guid data being found</response>
+             <response code="404">If the guid does not exist</response>     
+             <response code="400">If the guid is invalid</response>   
+             <response code="500">If any unexpected error</response>   
+        </member>
+        <member name="M:GuidDataCRUD.Web.Controllers.GuidDataController.CreateGuidData(GuidDataCRUD.Business.Contracts.GuidDataRequest)">
+             <summary>
+             Create a random guid with given data
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /guid
+                 {
+                    "user": "user1",
+                    "expire": "1427736345"
+                 }
+                 
+             </remarks>
+             <param name="request">The data</param>
+             <returns>The newly created guid data</returns>
+             <response code="201">Returns the newly created guid data</response>
+             <response code="400">If the guid is invalid</response>  
+             <response code="500">If any unexpected error, e.g, the auto-generated guid already exists</response>   
+        </member>
+        <member name="M:GuidDataCRUD.Web.Controllers.GuidDataController.UpsertGuidData(System.String,GuidDataCRUD.Business.Contracts.GuidDataRequest)">
+            <summary>
+            Idempotent insert/update a specific guid
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST /guid/3BED9CEFBB9F43E99DFE3EAE6CC5847F
+                {
+                   "user": "user1",
+                   "expire": "1427736345"
+                }
+                
+            </remarks>   
+            <param name="guid">The guid, must be 32-bit hexadecimal in uppercase</param>
+            <param name="request">The data</param>
+            <returns>The affected guid data</returns>
+            <response code="200">Returns the updated guid data</response>
+            <response code="201">Returns the newly created guid data</response>
+            <response code="400">If the guid or request is invalid</response>  
+            <response code="500">If any unexpected error</response>   
+        </member>
+        <member name="M:GuidDataCRUD.Web.Controllers.GuidDataController.DeleteGuidData(System.String)">
+            <summary>
+            Delete a specific guid
+            </summary>
+            <remarks>
+            Sample request:
+            
+                DELETE /guid/3BED9CEFBB9F43E99DFE3EAE6CC5847F
+                
+            </remarks>   
+            <param name="guid">The guid, must be 32-bit hexadecimal in uppercase</param>
+            <returns></returns>
+            <response code="204">If the guid is successfully deleted</response>
+            <response code="404">If the guid does not exist</response>  
+            <response code="400">If the guid is invalid</response>  
+            <response code="500">If any unexpected error</response>   
+        </member>
+        <member name="M:GuidDataCRUD.Web.Filters.ValidateModelFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Handle model state errors
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:GuidDataCRUD.Web.Filters.ValidateModelFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            Handle model state errors and validation exceptions on ActionContext
+            </summary>
+            <param name="executedContext"></param>
+        </member>
+        <member name="T:GuidDataCRUD.Web.Middlewares.GlobalErrorHandler">
+            <summary>
+            Global error handling on HttpContext
+            </summary>
+        </member>
+    </members>
+</doc>
