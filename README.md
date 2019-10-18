@@ -14,7 +14,7 @@ localhost:6379
 ```
 2) **Sql server database** should be depoyed first.
 
-[GuidDataDB](https://github.com/jhcr/GuidDataDB) is the database project for publising tables and stored procedures to following database:
+[GuidDataDB](https://github.com/jhcr/crud-api-example-db) is the database project for publising tables and stored procedures to following database:
 ```
 Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=GuidDataDatabase
 ```
@@ -22,7 +22,7 @@ Please clone and deploy/publish it first.
 
 ### Runing the Web API
 
-Runing [GuidDataAPI](https://github.com/jhcr/GuidDataAPI) project by following command:
+Runing [GuidDataAPI](https://github.com/jhcr/crud-api-example) project by following command:
 ```
 C:\YouPathTo\GuidDataAPI\GuidDataCRUD.Web>dotnet run
 ```
